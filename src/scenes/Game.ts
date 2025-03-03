@@ -36,7 +36,7 @@ export class Game extends Scene
 
     update() {
             if (this.cursors.up.isDown) {
-            this.player.setVelocityY(-130);
+            this.player.setVelocityY(-140);
         }
     }
 }
