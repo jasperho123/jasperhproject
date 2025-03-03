@@ -12,20 +12,31 @@ export class Game extends Scene
         super('Game');
     }
 
+    preload(){
+
+        this.load.image('guy', 'assets/bird.png');
+        this.load.image('pipe', 'assets/pipe.png');
+    }
+
     create ()
     {
-        this.background = this.add.image(190, 200, 'bg');
+        this.cursors = this.input.keyboard!.createCursorKeys();
 
+        this.background = this.add.image(190, 300, 'bg');
 
+        this.player = this.physics.add.image(10,10, 'guy').setScale(2.5);
+        this.player.setCollideWorldBounds(true);
+
+        
 
         this.input.once('pointerdown', () => {
-
-            this.scene.start('GameOver');
-
+            // float player
         });
     }
 
     update() {
-
+            if (this.cursors.up.isDown) {
+            this.player.setVelocityY(-130);
+        }
     }
 }
