@@ -7,6 +7,8 @@ export class Game extends Scene
     msg_text : Phaser.GameObjects.Text;
     cursors: Phaser.Types.Input.Keyboard.CursorKeys;
     player: Phaser.Types.Physics.Arcade.ImageWithDynamicBody;
+    bg: any;
+    pipe: any;
     constructor ()
     {
         super('Game');
@@ -21,8 +23,11 @@ export class Game extends Scene
     create ()
     {
         this.cursors = this.input.keyboard!.createCursorKeys();
-
-        this.background = this.add.image(190, 300, 'bg');
+        
+        // this.background = this.add.image(190, 300, 'bg');
+        this.bg = this.add.tileSprite(190,300, 390, 600, 'bg')
+        
+        // this.pipe = this.add.tileSprite(190, 300, 270, 148, 'pipe').setScale(2.5);
 
         this.player = this.physics.add.image(10,10, 'guy').setScale(2.5);
         this.player.setCollideWorldBounds(true);
@@ -35,8 +40,11 @@ export class Game extends Scene
     }
 
     update() {
-            if (this.cursors.up.isDown) {
+            if (this.cursors.space.isDown) {
             this.player.setVelocityY(-150);
         }
+
+        this.bg.tilePositionX += 1;
+        // this.pipe.tilePositionX += 1;
     }
 }

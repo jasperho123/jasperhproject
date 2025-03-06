@@ -28,8 +28,13 @@ export class MainMenu extends Scene
             stroke: '#000000', strokeThickness: 6,
             align: 'center'
         })        
-        this.title = this.add.text(110, 350, 'flappybird', {
-            fontFamily: 'Arial Black', fontSize: 30, color: '#ffffff',
+        this.title = this.add.text(110, 350, 'Flappybird', {
+            fontFamily: 'Arial Black', fontSize: 25, color: '#ffffff',
+            stroke: '#000000', strokeThickness: 6,
+            align: 'center'
+        })
+        this.title = this.add.text(20, 450, 'To jump press spacebar', {
+            fontFamily: 'Arial Black', fontSize: 25, color: '#ffffff',
             stroke: '#000000', strokeThickness: 6,
             align: 'center'
         })
