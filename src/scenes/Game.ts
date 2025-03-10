@@ -47,7 +47,7 @@ export class Game extends Scene
         this.pipes.children.iterate((pipe: any) => {
             // move left ( x-- )
             pipe.x--;
-            if (pipe.x < 0){
+            if (pipe.x < -50){
                 this.pipes.remove(pipe);
                 this.createPipe();
             }
@@ -56,7 +56,8 @@ export class Game extends Scene
 
     createPipe(){
         // Phaser.Math.FloatBetween
-        let pipe = this.add.sprite(400,400,'pipe');
+        // value = Phaser.Math.FloatBetween(min, max);
+        let pipe = this.add.image(Phaser.Math.FloatBetween(100,500),'pipe').setScale(1.4);
         this.pipes.add(pipe);
     }
 }
