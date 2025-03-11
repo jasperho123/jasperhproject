@@ -9,10 +9,12 @@ export class Game extends Scene
     player: Phaser.Types.Physics.Arcade.ImageWithDynamicBody;
     bg: any;
     pipes: any;
+    lowerPipe: any;
     constructor ()
     {
         super('Game');
     }
+
 
     preload(){
 
@@ -37,17 +39,17 @@ export class Game extends Scene
         this.createPipe();
 
     }
-
+    
     update() {
         if (this.cursors.space.isDown) {
-            this.player.setVelocityY(-150);
+            this.player.setVelocityY(-120);
         }
 
         this.bg.tilePositionX += 1;
         this.pipes.children.iterate((pipe: any) => {
             // move left ( x-- )
             pipe.x--;
-            if (pipe.x < -50){
+            if (pipe.x < -100){
                 this.pipes.remove(pipe);
                 this.createPipe();
             }
@@ -57,7 +59,13 @@ export class Game extends Scene
     createPipe(){
         // Phaser.Math.FloatBetween
         // value = Phaser.Math.FloatBetween(min, max);
-        let pipe = this.add.image(Phaser.Math.FloatBetween(100,500),'pipe').setScale(1.4);
+        let yCoord = Phaser.Math.FloatBetween(-50, 55);
+
+        let pipe = this.add.image(400, yCoord, 'pipe').setScale(1.5);
         this.pipes.add(pipe);
+
+        let yCoordLower = Phaser.Math.FloatBetween(550, 665);
+        let lowerPipe = this.add.image(400, yCoordLower, 'pipe').setScale(1.5);
+        this.lowerPipe.add(pipe);
     }
 }
