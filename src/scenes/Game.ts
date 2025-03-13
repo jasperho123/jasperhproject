@@ -9,7 +9,7 @@ export class Game extends Scene
     player: Phaser.Types.Physics.Arcade.ImageWithDynamicBody;
     bg: any;
     pipes: any;
-    lowerPipe: any;
+
     constructor ()
     {
         super('Game');
@@ -29,20 +29,24 @@ export class Game extends Scene
         // this.background = this.add.image(190, 300, 'bg');
         this.bg = this.add.tileSprite(190,300, 390, 600, 'bg');
 
-        this.player = this.physics.add.image(10,10, 'guy').setScale(2.5);
-        this.player.setCollideWorldBounds(true);
+        this.player = this.physics.add.image(30,30, 'guy').setScale(2.5);
+        this.player.setCollideWorldBounds(false);
+        this.player.addCollidesWith(this.pipes)
         
         this.pipes = this.physics.add.group( {
             allowGravity: false,
+            
         });
         
+        this.pipes.addCollidesWith(this.player)
+
         this.createPipe();
 
     }
     
     update() {
         if (this.cursors.space.isDown) {
-            this.player.setVelocityY(-120);
+            this.player.setVelocityY(-170);
         }
 
         this.bg.tilePositionX += 1;
@@ -59,13 +63,17 @@ export class Game extends Scene
     createPipe(){
         // Phaser.Math.FloatBetween
         // value = Phaser.Math.FloatBetween(min, max);
-        let yCoord = Phaser.Math.FloatBetween(-50, 55);
+        let gap = 100;
+        let edge = Phaser.Math.FloatBetween(gap, 600-gap);
+        let yCoord;
+        if (Math.random() < 0.5){ // top
+            yCoord = edge-gap;
+        } else { // bottom
+            yCoord = edge+gap;
+        }
 
-        let pipe = this.add.image(400, yCoord, 'pipe').setScale(1.5);
+        let pipe = this.add.image(380, yCoord, 'pipe').setScale(1.5);
         this.pipes.add(pipe);
 
-        let yCoordLower = Phaser.Math.FloatBetween(550, 665);
-        let lowerPipe = this.add.image(400, yCoordLower, 'pipe').setScale(1.5);
-        this.lowerPipe.add(pipe);
     }
 }
