@@ -26,19 +26,18 @@ export class Game extends Scene
     {
         this.cursors = this.input.keyboard!.createCursorKeys();
         
-        // this.background = this.add.image(190, 300, 'bg');
         this.bg = this.add.tileSprite(190,300, 390, 600, 'bg');
 
-        this.player = this.physics.add.image(30,30, 'guy').setScale(2.5);
+        this.player = this.physics.add.image(30,30, 'guy').setScale(2.75);
         this.player.setCollideWorldBounds(false);
-        this.player.addCollidesWith(this.pipes)
+
+       
         
         this.pipes = this.physics.add.group( {
-            allowGravity: false,
-            
+            allowGravity: false,       
         });
         
-        this.pipes.addCollidesWith(this.player)
+         this.physics.add.collider(this.player, this.pipes);
 
         this.createPipe();
 
@@ -49,10 +48,10 @@ export class Game extends Scene
             this.player.setVelocityY(-170);
         }
 
-        this.bg.tilePositionX += 1;
+        this.bg.tilePositionX += 2;
         this.pipes.children.iterate((pipe: any) => {
             // move left ( x-- )
-            pipe.x--;
+            pipe.x -= 2;
             if (pipe.x < -100){
                 this.pipes.remove(pipe);
                 this.createPipe();
@@ -63,7 +62,7 @@ export class Game extends Scene
     createPipe(){
         // Phaser.Math.FloatBetween
         // value = Phaser.Math.FloatBetween(min, max);
-        let gap = 100;
+        let gap = 200;
         let edge = Phaser.Math.FloatBetween(gap, 600-gap);
         let yCoord;
         if (Math.random() < 0.5){ // top
@@ -72,7 +71,7 @@ export class Game extends Scene
             yCoord = edge+gap;
         }
 
-        let pipe = this.add.image(380, yCoord, 'pipe').setScale(1.5);
+        let pipe = this.add.image(370, yCoord, 'pipe').setScale(1.5);
         this.pipes.add(pipe);
 
     }
