@@ -9,6 +9,7 @@ export class Game extends Scene
     player: Phaser.Types.Physics.Arcade.ImageWithDynamicBody;
     bg: any;
     pipes: any;
+    score: any;
 
     constructor ()
     {
@@ -34,10 +35,24 @@ export class Game extends Scene
        
         
         this.pipes = this.physics.add.group( {
-            allowGravity: false,       
+            allowGravity: false,
+            immovable: true,       
         });
         
-         this.physics.add.collider(this.player, this.pipes);
+        // this.physics.add.collider(this.player, this.pipes)
+
+        
+
+        this.physics.add.collider(
+            this.player,
+            this.pipes,
+            (_player: any, _pipes: any) =>
+            {
+                this.physics.pause();
+
+                this.scene.start("GameOver");
+            }
+        )
 
         this.createPipe();
 
@@ -48,15 +63,17 @@ export class Game extends Scene
             this.player.setVelocityY(-170);
         }
 
-        this.bg.tilePositionX += 2;
+        this.bg.tilePositionX += 1.85;
         this.pipes.children.iterate((pipe: any) => {
             // move left ( x-- )
-            pipe.x -= 2;
-            if (pipe.x < -50){
+            pipe.x -= 1.85;
+            if (pipe.x < -60){
                 this.pipes.remove(pipe);
                 this.createPipe();
             }
         })
+
+        
     }
 
     createPipe(){
