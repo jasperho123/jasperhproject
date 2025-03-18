@@ -52,7 +52,7 @@ export class Game extends Scene
         this.pipes.children.iterate((pipe: any) => {
             // move left ( x-- )
             pipe.x -= 2;
-            if (pipe.x < -100){
+            if (pipe.x < -50){
                 this.pipes.remove(pipe);
                 this.createPipe();
             }
