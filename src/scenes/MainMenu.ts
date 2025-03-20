@@ -5,6 +5,7 @@ export class MainMenu extends Scene
     background: GameObjects.Image;
     logo: GameObjects.Image;
     title: GameObjects.Text;
+    bg: any;
 
     constructor ()
     {
@@ -13,7 +14,7 @@ export class MainMenu extends Scene
 
     create ()
     {
-        this.background = this.add.image(190, 300, 'bg');
+        this.bg = this.add.tileSprite(190,300, 390, 600, 'bg');
 
         this.logo = this.add.image(190, 60, 'logo').setScale(0.5);
 
@@ -44,5 +45,9 @@ export class MainMenu extends Scene
             this.scene.start('Game');
 
         });
+    }
+
+    update () {
+        this.bg.tilePositionX += 1.85;
     }
 }

@@ -10,6 +10,7 @@ export class Game extends Scene
     bg: any;
     pipes: any;
     score: any;
+    scoreText: any;
 
     constructor ()
     {
@@ -28,6 +29,10 @@ export class Game extends Scene
         this.cursors = this.input.keyboard!.createCursorKeys();
         
         this.bg = this.add.tileSprite(190,300, 390, 600, 'bg');
+
+        let score = 0
+
+        this.scoreText = this.add.text(140,100, 'score = 0', {fontSize: '20px', color:'rgb(25, 0, 255)' })
 
         this.player = this.physics.add.image(30,30, 'guy').setScale(2.75);
         this.player.setCollideWorldBounds(false);
@@ -50,7 +55,7 @@ export class Game extends Scene
             {
                 this.physics.pause();
 
-                this.scene.start("GameOver");
+                this.scene.start("GameOver",{score});
             }
         )
 
