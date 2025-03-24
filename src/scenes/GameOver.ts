@@ -23,7 +23,7 @@ export class GameOver extends Scene
             align: 'center'
         });
 
-        this.gameover_text = this.add.text(190, 300, 'Score = ' ,{
+        this.gameover_text = this.add.text(190, 300, 'Score: ' ,{
             fontFamily: 'Arial Black', fontSize: 30, color: '#ffffff',
             stroke: '#000000', strokeThickness: 6,
             align: 'center'

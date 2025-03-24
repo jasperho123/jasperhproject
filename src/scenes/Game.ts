@@ -30,9 +30,15 @@ export class Game extends Scene
         
         this.bg = this.add.tileSprite(190,300, 390, 600, 'bg');
 
-        let score = 0
+        let score = 0;
 
-        this.scoreText = this.add.text(140,100, 'score = 0', {fontSize: '20px', color:'rgb(25, 0, 255)' })
+        function addScore() {
+        
+        }
+
+        this.scoreText = this.add.text(140,100, 'score = '+ score, {fontSize: '20px', color:'rgb(0, 0, 0)' })
+        
+
 
         this.player = this.physics.add.image(30,30, 'guy').setScale(2.75);
         this.player.setCollideWorldBounds(false);
@@ -55,7 +61,7 @@ export class Game extends Scene
             {
                 this.physics.pause();
 
-                this.scene.start("GameOver",{score});
+                this.scene.start("GameOver",);
             }
         )
 
@@ -68,16 +74,15 @@ export class Game extends Scene
             this.player.setVelocityY(-170);
         }
 
-        this.bg.tilePositionX += 1.85;
+        this.bg.tilePositionX += 1.80;
         this.pipes.children.iterate((pipe: any) => {
             // move left ( x-- )
-            pipe.x -= 1.85;
+            pipe.x -= 1.80;
             if (pipe.x < -60){
                 this.pipes.remove(pipe);
                 this.createPipe();
             }
         })
-
         
     }
 
@@ -98,3 +103,5 @@ export class Game extends Scene
 
     }
 }
+
+
