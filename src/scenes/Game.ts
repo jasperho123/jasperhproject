@@ -30,20 +30,10 @@ export class Game extends Scene
         
         this.bg = this.add.tileSprite(190,300, 390, 600, 'bg');
 
-        let score = 0;
-
-        function addScore() {
+        this.scoreText = this.add.text(140,100, 'Score = 0', {fontSize: '20px', color:'rgb(0, 0, 0)' })
         
-        }
-
-        this.scoreText = this.add.text(140,100, 'score = '+ score, {fontSize: '20px', color:'rgb(0, 0, 0)' })
-        
-
-
         this.player = this.physics.add.image(30,30, 'guy').setScale(2.75);
         this.player.setCollideWorldBounds(false);
-
-       
         
         this.pipes = this.physics.add.group( {
             allowGravity: false,
@@ -64,7 +54,7 @@ export class Game extends Scene
                 this.scene.start("GameOver",);
             }
         )
-
+        
         this.createPipe();
 
     }
@@ -78,12 +68,18 @@ export class Game extends Scene
         this.pipes.children.iterate((pipe: any) => {
             // move left ( x-- )
             pipe.x -= 1.80;
-            if (pipe.x < -60){
+            if (pipe.x < -45){
+                // this.score += 1;
+                // this.scoreText.setText('Score = '+ this.score);
+                // console.log(this.score);
                 this.pipes.remove(pipe);
                 this.createPipe();
+                // this.changeScore();
             }
         })
         
+
+
     }
 
     createPipe(){
@@ -102,6 +98,19 @@ export class Game extends Scene
         this.pipes.add(pipe);
 
     }
-}
+
+        // changeScore(){
+        //         let score = 0;
+        //         score += 1;
+        //         this.scoreText.setText('Score = '+ this.score);
+        //         console.log(this.score);
+        //     }
+    }
+        
+    
+
+
+
+
 
 
